@@ -82,3 +82,10 @@ Examples:
 
 @user.present! :not_a_real_method # NoMethodError
 ```
+
+Design Decisions
+=============
+* All presenter methods are accessed via 'present' and 'present!'. This helps identify whether the output is coming from the presenter or directly from the model. It also keeps intact the familiar and direct access to a model's attributes.
+* The 'present' method will fail silently. This keeps minor accessor errors from breaking an entire page. Errors can still be logged/handled via the 'error_response' method.
+* If you do not want a particular method call to fail silently, the 'present!' method will throw errors as usual.
+* If a method is not found on the presenter, it will delegate the call to the model.
