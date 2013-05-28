@@ -1,4 +1,85 @@
-Short Circuit
+short-circuit
 =============
 
 [![Build Status](https://travis-ci.org/jpruetting/short-circuit.png?branch=master)](https://travis-ci.org/jpruetting/short-circuit)
+
+Short Circuit enables simple presenters for Rails views.
+
+
+Installation
+=============
+
+Include the gem in your Gemfile:
+
+```ruby
+gem 'short-circuit'
+```
+
+Usage
+=============
+
+Model:
+
+```ruby
+class User < ActiveRecord::Base
+  attr_accessible :first_name, :last_name, :job_title, :member_since
+end
+```
+
+Presenter:
+
+```ruby
+class UserPresenter < ShortCircuit::Presenter
+  def first_name
+    @user.first_name.titleize
+  end
+
+  def last_name
+    @user.last_name.titleize
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def job_title
+    @user.job_title || 'none listed'
+  end
+
+  def member_since
+    @user.member_since.to_formatted_s(:long) 
+  end
+
+  def error_response(method, *args, &block)
+    link_to 'N/A', root_path
+  end
+end
+```
+
+Examples:
+
+```ruby
+@user = User.new(
+  first_name: 'john',
+  last_name: 'smith',
+  job_title: nil,
+  member_since: 3.months.ago
+)
+
+@user.first_name # john
+@user.present :first_name # John
+
+@user.full_name # NoMethodError
+@user.present :full_name # John Smith
+
+@user.member_since # 2013-02-28 20:46:32 UTC
+@user.present :member_since # February 28, 2013 20:46
+
+@user.job_title.titleize # undefined method `titleize' for nil:NilClass
+@user.present(:job_title).upcase # NONE LISTED
+
+@user.not_a_real_method # NoMethodError
+@user.present :not_a_real_method # <a href="/">N/A</a>
+
+@user.present! :not_a_real_method # NoMethodError
+```
