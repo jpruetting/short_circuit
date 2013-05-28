@@ -34,16 +34,12 @@ class UserPresenter < ShortCircuit::Presenter
     @user.first_name.titleize
   end
 
-  def last_name
-    @user.last_name.titleize
-  end
-
   def full_name
     "#{first_name} #{last_name}"
   end
 
   def job_title
-    @user.job_title || 'none listed'
+    @user.job_title || 'not listed'
   end
 
   def member_since
@@ -69,14 +65,17 @@ Examples:
 @user.first_name # john
 @user.present :first_name # John
 
+@user.last_name # smith
+@user.present :last_name # smith
+
 @user.full_name # NoMethodError
-@user.present :full_name # John Smith
+@user.present :full_name # John smith
 
 @user.member_since # 2013-02-28 20:46:32 UTC
 @user.present :member_since # February 28, 2013 20:46
 
-@user.job_title.titleize # undefined method `titleize' for nil:NilClass
-@user.present(:job_title).upcase # NONE LISTED
+@user.job_title.upcase # undefined method 'upcase' for nil:NilClass
+@user.present(:job_title).upcase # NOT LISTED
 
 @user.not_a_real_method # NoMethodError
 @user.present :not_a_real_method # <a href="/">N/A</a>
