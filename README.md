@@ -1,4 +1,4 @@
-short-circuit
+short_circuit
 =============
 
 [![Build Status](https://travis-ci.org/jpruetting/short-circuit.png?branch=master)](https://travis-ci.org/jpruetting/short-circuit)
@@ -12,7 +12,7 @@ Installation
 Include the gem in your Gemfile:
 
 ```ruby
-gem 'short-circuit'
+gem 'short_circuit'
 ```
 
 Usage
