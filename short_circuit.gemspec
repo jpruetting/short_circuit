@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = ShortCircuit::VERSION
   s.authors     = ["Jim Pruetting"]
   s.email       = ["jim@roboticmethod.com}"]
-  s.homepage    = "http://www.roboticmethod.com"
+  s.homepage    = "https://github.com/jpruetting/short-circuit"
   s.summary     = "Simple presenters for Rails."
   s.description = "Short Circuit enables simple presenters for Rails views."
 
