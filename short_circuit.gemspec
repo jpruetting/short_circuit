@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["jim@roboticmethod.com}"]
   s.homepage    = "https://github.com/jpruetting/short-circuit"
   s.summary     = "Simple presenters for Rails."
-  s.description = "Short Circuit enables simple presenters for Rails views."
+  s.description = "Short Circuit adds simple presenters for Rails views."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"]

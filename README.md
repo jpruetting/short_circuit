@@ -3,7 +3,7 @@ short-circuit
 
 [![Build Status](https://travis-ci.org/jpruetting/short-circuit.png?branch=master)](https://travis-ci.org/jpruetting/short-circuit)
 
-Short Circuit enables simple presenters for Rails views.
+Short Circuit adds simple presenters for Rails views.
 
 
 Installation
