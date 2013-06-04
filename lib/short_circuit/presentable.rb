@@ -7,8 +7,8 @@ module ShortCircuit
     def present(method, *args, &block)
       begin
         present!(method, *args, &block)
-      rescue
-        presenter.error_response(method, *args, &block)
+      rescue Exception => error
+        presenter.error_response(error, method, *args, &block)
       end
     end
 

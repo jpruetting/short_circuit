@@ -13,7 +13,7 @@ module ShortCircuit
       ApplicationController.helpers
     end
 
-    def error_response(method, *args, &block)
+    def error_response(error, method, *args, &block)
       ''
     end
     
