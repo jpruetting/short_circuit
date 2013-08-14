@@ -21,4 +21,17 @@ class TestModelPresenter < ShortCircuit::Presenter
   def foo
     @testmodel.foo.titleize
   end
+
+  def foobar(string_method)
+    'foobar'.send(string_method)
+  end
+
+  def block(&block)
+    s = ''
+    yield(s)
+  end
+
+  def error_response(method, *args, &block)
+    'error'
+  end
 end

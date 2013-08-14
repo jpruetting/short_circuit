@@ -19,11 +19,19 @@ module ShortCircuit
     end
 
     it "should fail silently by default" do
-      expect { @model.present(:not_a_method) }.not_to raise_error NoMethodError
+      expect { @model.present(:not_a_method) }.not_to raise_error
     end
 
     it "should throw errors when using bang method" do
-      expect { @model.present!(:not_a_method) }.to raise_error NoMethodError
+      expect { @model.present!(:not_a_method) }.to raise_error
     end
+
+    it "should pass on additional arguments for presenter methods" do
+      @model.present!(:foobar, :upcase).should eql 'foobar'.upcase
+    end 
+
+    it "should accept a block for presenter methods" do
+      @model.present!(:block){ |s| s = '123' }.should eql '123'
+    end 
   end
 end
