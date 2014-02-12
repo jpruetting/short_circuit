@@ -107,6 +107,5 @@ Design goals for short_circuit
 * Minimize project size and scope
 * Preserve direct access to model attributes
 * Create a separate access point for presenter methods
-* Integrate with ActiveRecord models by default
 * Silence accessor errors by default
 * Delegate missing presenter methods to the model object
