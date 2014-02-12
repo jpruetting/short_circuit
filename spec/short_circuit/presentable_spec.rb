@@ -1,37 +1,66 @@
-require_relative '../spec_helper'
- 
+require 'spec_helper'
+
 module ShortCircuit
   describe Presentable do
-    before :each do
-      @model = TestModel.new('foo', 'bar')
+    before do
+      mock_model('TestModel')
+      TestModel.any_instance.stub(:test_method).and_return('Test Method')
+      TestModel.send(:include, Presentable)
+      stub_const('TestModelPresenter', Presenter)
     end
 
-    it "should have a presenter" do
-      @model.presenter.should be_an_instance_of TestModelPresenter
+    let(:model) { TestModel.new }
+
+    describe '#presenter' do
+      subject(:presenter) { model.presenter }
+
+      it 'returns the correct presenter' do
+        expect(presenter).to be_a(Presenter)
+        expect(presenter).to be_a(TestModelPresenter)
+      end
     end
 
-    it "should present model attributes" do
-      @model.present(:foo).should eql 'Foo'
+    describe '#present' do
+      context 'when the method exists' do
+        let(:method) { :test_method }
+
+        it 'calls the presenter method' do
+          expect(model.presenter).to receive(:send)
+          model.present(method)
+        end
+      end
+
+      context 'when the method does not exist' do
+        let(:method) { :fake_method }
+
+        it 'does not throw an error' do
+          expect{model.present(method)}.to_not raise_error
+        end
+
+        it 'calls the error_response method' do
+          expect(model.presenter).to receive(:error_response)
+          model.present(method)
+        end
+      end
     end
 
-    it "should delegate model attributes" do
-      @model.present(:bar).should eql 'bar'
+    describe '#present!' do
+      context 'when the method exists' do
+        let(:method) { :test_method }
+
+        it 'calls the presenter method' do
+          expect(model.presenter).to receive(:send)
+          model.present!(method)
+        end
+      end
+
+      context 'when the method does not exist' do
+        let(:method) { :fake_method }
+
+        it 'throws an error' do
+          expect{model.present!(method)}.to raise_error(NoMethodError)
+        end
+      end
     end
-
-    it "should fail silently by default" do
-      expect { @model.present(:not_a_method) }.not_to raise_error
-    end
-
-    it "should throw errors when using bang method" do
-      expect { @model.present!(:not_a_method) }.to raise_error
-    end
-
-    it "should pass on additional arguments for presenter methods" do
-      @model.present!(:foobar, :upcase).should eql 'foobar'.upcase
-    end 
-
-    it "should accept a block for presenter methods" do
-      @model.present!(:block){ |s| s = '123' }.should eql '123'
-    end 
   end
 end

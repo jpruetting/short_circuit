@@ -1,37 +1,16 @@
 ENV['RAILS_ENV'] ||= 'test'
 
-require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+
+require File.expand_path('../dummy/config/environment', __FILE__)
+
+require 'rails/all'
 require 'rspec/rails'
+require 'bundler/setup'
 
-require_relative '../lib/short_circuit/presentable'
-require_relative '../lib/short_circuit/presenter'
+Bundler.require
 
-class TestModel
-  include ShortCircuit::Presentable
-
-  attr_accessor :foo, :bar
-
-  def initialize(foo, bar)  
-    self.foo = foo
-    self.bar = bar
-  end
-end
-
-class TestModelPresenter < ShortCircuit::Presenter
-  def foo
-    @testmodel.foo.titleize
-  end
-
-  def foobar(string_method)
-    'foobar'.send(string_method)
-  end
-
-  def block(&block)
-    s = ''
-    yield(s)
-  end
-
-  def error_response(method, *args, &block)
-    'error'
-  end
+RSpec.configure do |config|
+  config.color = true
 end

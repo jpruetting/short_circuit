@@ -1,7 +1,13 @@
-source "http://rubygems.org"
+source 'https://rubygems.org'
 
 gemspec
 
-group :development, :test do
+group :test do
+  gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'rake'
+end
+
+group :development do
+  gem 'pry'
 end

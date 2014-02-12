@@ -13,29 +13,15 @@ Install the gem in your Gemfile:
 gem 'short_circuit'
 ```
 
-If you're using ActiveRecord, you don't need to add anything to your model. short_circuit will be included automatically:
+Include short_circuit in your model:
 
 ```ruby
 # app/models/user.rb
  
 class User < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :job_title, :member_since
-end
-```
-
-If you want to use a presenter with something other than an AR model, you can include short_circuit manually:
-
-```ruby
-class User
-  include DataMapper::Resource
-  
   include ShortCircuit::Presentable
-  
-  property :id, Serial
-  property :first_name, String
-  property :last_name, String
-  property :job_title, String
-  property :member_since, DateTime
+
+  attr_accessible :first_name, :last_name, :job_title, :member_since
 end
 ```
 
