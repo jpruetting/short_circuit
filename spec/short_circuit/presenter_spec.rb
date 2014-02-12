@@ -2,7 +2,9 @@ require 'spec_helper'
 
 module ShortCircuit
   describe Presenter do
-    let(:presentable_object) { mock_model('TestModel', test_method: 'Test Method') }
+    let(:presentable_object) do
+      mock_model('TestModel', test_method: 'Test Method')
+    end
 
     let(:presenter) { Presenter.new(presentable_object) }
 
@@ -29,7 +31,8 @@ module ShortCircuit
       end
 
       it 'set an instance variable for presentable_object' do
-        expect(presenter.instance_variable_get("@#{presentable_object.class.to_s.underscore}")).to eq(presentable_object)
+        var = "@#{presentable_object.class.to_s.underscore}"
+        expect(presenter.instance_variable_get(var)).to eq(presentable_object)
       end
     end
 
@@ -49,6 +52,5 @@ module ShortCircuit
         expect(error_response).to be_empty
       end
     end
-    
   end
 end

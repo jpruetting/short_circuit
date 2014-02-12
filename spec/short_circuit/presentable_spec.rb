@@ -34,7 +34,7 @@ module ShortCircuit
         let(:method) { :fake_method }
 
         it 'does not throw an error' do
-          expect{model.present(method)}.to_not raise_error
+          expect { model.present(method) }.to_not raise_error
         end
 
         it 'calls the error_response method' do
@@ -58,7 +58,7 @@ module ShortCircuit
         let(:method) { :fake_method }
 
         it 'throws an error' do
-          expect{model.present!(method)}.to raise_error(NoMethodError)
+          expect { model.present!(method) }.to raise_error
         end
       end
     end
