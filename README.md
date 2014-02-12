@@ -102,8 +102,8 @@ In the view, you don't need to instantiate any presenter/decorator objects, just
 @user.present! :not_a_real_method # NoMethodError
 ```
 
-Design goals for short_circuit
-===============================
+Design goals
+============
 * Minimize project size and scope
 * Preserve direct access to model attributes
 * Create a separate access point for presenter methods
