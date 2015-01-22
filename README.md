@@ -1,6 +1,8 @@
 short_circuit
 =============
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jpruetting/short_circuit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Gem Version](https://badge.fury.io/rb/short_circuit.png)](http://badge.fury.io/rb/short_circuit) [![Build Status](https://travis-ci.org/jpruetting/short_circuit.png?branch=master)](https://travis-ci.org/jpruetting/short_circuit) [![Code Climate](https://codeclimate.com/github/jpruetting/short_circuit.png)](https://codeclimate.com/github/jpruetting/short_circuit)
 
 Short Circuit adds simple presenters for Rails views.
